@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+<meta charset="UTF-8">
+<title>图片颜色聚类可视化</title>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<img src="../images/1.png" hidden id="defaultImg">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+<h1>🎨 Image Color Visualization</h1>
+
+<div class="top-area">
+
+<div class="preview-card">
+<h3>Image Preview</h3>
+<canvas id="canvas"></canvas>
+</div>
+
+<div class="control-card">
+
+<h3>Controls</h3>
+
+<label>Upload Image</label>
+<input type="file" id="imageInput">
+
+<label>K Value</label>
+<input type="number" id="kValue" value="5" min="3" max="10">
+
+<label>Color Space</label>
+<select id="colorSpace">
+<option value="rgb">RGB</option>
+<option value="lab">LAB</option>
+</select>
+
+<label>Chart Type</label>
+<select id="chartType">
+<option value="pie">Pie</option>
+<option value="bar">Bar</option>
+</select>
+
+<button onclick="runClustering()">Analyze</button>
+
+</div>
+
+</div>
+
+<div class="chart-card">
+<h3>Visualization</h3>
+<div id="chart"></div>
+</div>
+
+<div id="harmony"></div>
+
+</div>
+
+<script src="kmeans.js"></script>
+<script src="color.js"></script>
+<script src="main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+body{
+    margin:0;
+    font-family:Segoe UI, sans-serif;
+
+    background:linear-gradient(
+        135deg,
+        #667eea,
+        #764ba2
+    );
+
+    min-height:100vh;
+}
+
+/* 主容器 */
+.app{
+    width:1100px;
+    margin:auto;
+    padding:30px;
+    color:white;
+}
+
+/* 标题 */
+h1{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+/* 上半区域 */
+.top-area{
+    display:flex;
+    gap:20px;
+}
+
+/* 卡片通用 */
+.preview-card,
+.control-card,
+.chart-card{
+
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(12px);
+
+    border-radius:15px;
+    padding:20px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* 图片区域 */
+.preview-card{
+    flex:1;
+    text-align:center;
+}
+
+#canvas{
+    max-width:100%;
+    border-radius:10px;
+}
+
+/* 控制面板 */
+.control-card{
+    width:300px;
+    display:flex;
+    flex-direction:column;
+}
+
+label{
+    margin-top:10px;
+}
+
+input,select{
+    margin-top:5px;
+    padding:8px;
+    border-radius:6px;
+    border:none;
+}
+
+/* 按钮 */
+button{
+    margin-top:15px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+
+    background:#ff7eb3;
+    color:white;
+    font-weight:bold;
+
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+    background:#ff4f95;
+}
+
+/* 图表 */
+.chart-card{
+    margin-top:20px;
+}
+
+#chart{
+    width:100%;
+    height:450px;
+}
+
+/* Harmony */
+#harmony{
+    margin-top:20px;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+}
