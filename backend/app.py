@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from openai import OpenAI
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -8,12 +10,15 @@ from sklearn.cluster import KMeans
 
 import io
 
+load_dotenv()
+api_key = os.getenv("DEEPSEEK_API_KEY")
+
 app = Flask(__name__)
 client = OpenAI(
-    api_key="sk-cs7Z9WE5LUaFa2tdUH1jd3Mja1fIQvRr6KKaIEzA0x8FoBYi",
-    base_url="https://api.closeai-asia.com/v1"
+    api_key=api_key,
+    base_url="https://api.deepseek.com/v1"
 )
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app)  # 允许所有来源的跨域请求
 
 @app.route("/cluster", methods=["POST"])
 def cluster():
@@ -23,7 +28,8 @@ def cluster():
     space = request.form.get("space", "rgb")
 
     image = Image.open(file.stream)
-    image = image.resize((200,200))  # 防止太慢
+    max_size = 200
+    image.thumbnail((max_size, max_size), Image.Resampling.LANCZOS)
 
     pixels = np.array(image).reshape(-1,3)
 
@@ -38,7 +44,7 @@ def cluster():
     centers = kmeans.cluster_centers_
 
     if space == "lab":
-        centers = color.lab2rgb(centers.reshape(1,-1,3))[0]
+        centers = color.lab2rgb(centers)
 
     centers = (centers * 255).astype(int)
 
@@ -67,10 +73,8 @@ def harmony():
     """
 
     completion = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role":"user","content":prompt}
-        ]
+        model="deepseek-chat",  # DeepSeek 的对话模型
+        messages=[{"role":"user","content":prompt}]
     )
 
     answer = completion.choices[0].message.content

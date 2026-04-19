@@ -40,28 +40,6 @@ function loadImage(event) {
 
     img.src = URL.createObjectURL(file);
 }
-function runClustering(){
-
-    if(imagePixels.length===0){
-        alert("请先上传图片");
-        return;
-    }
-
-    const k = parseInt(
-        document.getElementById("kValue").value
-    );
-
-    console.log("Running KMeans, k =", k);
-
-    const result = kmeans(imagePixels, k);
-
-    console.log(result);
-
-    drawChart(result);
-    analyzeHarmonyAI(result);
-    const harmony=evaluateHarmony(result);
-    showHarmony(harmony);
-}
 
 async function runClustering(){
 
@@ -98,9 +76,6 @@ async function runClustering(){
 
     drawChart(result);
     analyzeHarmonyAI(result);
-
-    const harmony=evaluateHarmony(result);
-    showHarmony(harmony);
 }
 
 function drawChart(data){
